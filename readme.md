@@ -1,3 +1,48 @@
+# About this Fork
+
+allows you to use path style task name's to use with e.g. gulp-rev. Example:
+
+```coffeescript
+gulp.task 'deploy', ->
+  revManifest = jf.readFileSync("rev-manifest.json")
+  gulp.src 'index.html'
+    .pipe htmlreplace(revManifest)
+    .pipe gulp.dest('./build/')
+```
+
+with html `index.html` file:
+
+```html
+<!DOCTYPE html>
+  <head>
+    <!-- build:stylesheets/index.css -->
+    <link href="/stylesheets/index.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body></body>
+</html>
+```
+
+and manifest `rev-manifest.json` file:
+
+```json
+{
+  "stylesheets/index.css": "stylesheets/index-b7b7ad08.css",
+}
+```
+
+results to:
+
+```html
+<!DOCTYPE html>
+  <head>
+    <link rel="stylesheet" href="stylesheets/index-b7b7ad08.css">
+  </head>
+  <body></body>
+</html>
+```
+
+
 # gulp-html-replace [![NPM version][npm-image]][npm-url] [![Build status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 > Replace build blocks in HTML. Like useref but done right.
